@@ -1,0 +1,20 @@
+node_modules
+
+# Cache
+.cache
+.turbo
+
+# Build
+dist
+build
+
+# Environment
+.env
+.env.*
+
+# Shopify
+shopify.app.toml
+
+# Ignore shopify files created during app dev
+.shopify
+.shopify.lock

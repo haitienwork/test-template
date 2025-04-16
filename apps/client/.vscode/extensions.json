@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "shopify.polaris-for-vscode",
+    "tamasfe.even-better-toml",
+    "biomejs.biome",
+    "EditorConfig.EditorConfig"
+  ]
+}

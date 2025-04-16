@@ -1,0 +1,19 @@
+{% if block.settings.enable_product_search %}
+  {% render 'ght.product.search' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "GHT Product Search",
+  "target": "body",
+  "javascript": "ght.product.js",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_product_search",
+      "label": "Product Search",
+      "default": false
+    },
+  ]
+}
+{% endschema %}
