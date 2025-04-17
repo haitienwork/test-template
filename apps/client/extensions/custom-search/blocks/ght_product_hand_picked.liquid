@@ -1,0 +1,27 @@
+{% assign hand_picked_products = product.metafields.globo--filter--product_recommendation.hand_picked_products.value %}
+
+<div class="hand-picked-products">
+  <h2>{{ block.settings.title }}</h2>
+    <div class="hand-picked-products-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+      {% for product in hand_picked_products %}
+        <div class="hand-picked-product">
+          <h3>{{ product.title }}</h3>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Hand Picked Products",
+    "target": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Hand Picked Products"
+      }
+    ]
+  }
+{% endschema %}
