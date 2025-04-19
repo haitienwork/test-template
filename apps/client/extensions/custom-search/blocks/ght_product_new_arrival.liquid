@@ -1,0 +1,36 @@
+{% assign sorted_products = collections['all'].products | sort: 'created_at' | reverse %}
+
+<section class="ght-product-new-arrival">
+  <h2>{{ block.settings.title }}</h2>
+  <ul>
+    {% for product in sorted_products limit: block.settings.product_to_show %}
+      <li>
+        {{ product.title | link_to: product.url }}
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "GHT Product New Arrival",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "New Arrival"
+    },
+    {
+      "type": "range",
+      "id": "product_to_show",
+      "label": "Product to show",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 10
+    }
+  ]
+}
+{% endschema %}
