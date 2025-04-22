@@ -8,9 +8,16 @@ productRoutes.get('/', (c) => {
   const searchQuery = c.req.query()
   const searchParams = new URLSearchParams(searchQuery)
   const q = searchParams.get('q')
+  const handles = searchParams.get('handles')
   const collection = searchParams.get('collection')
   const category = searchParams.get('category')
   const vendor = searchParams.get('vendor')
+
+  if(handles) {
+    const handlesArray = handles.split(',')
+    const products = handlesArray.map((handle) => mockProducts.find((product) => product.handle === handle))
+    return c.json(products)
+  }
 
   if(q) {
     const suggestions = mockProducts.filter((product) => product.title.toLowerCase().includes(q?.toLowerCase() || '')).map(p => p.title)

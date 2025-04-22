@@ -2,10 +2,10 @@
 
 <div class="hand-picked-products">
   <h2>{{ block.settings.title }}</h2>
-    <div class="hand-picked-products-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+    <div class="hand-picked-products-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;">
       {% for product in hand_picked_products %}
         <div class="hand-picked-product">
-          <h3>{{ product.title }}</h3>
+          {% render 'ght.product.card', product_card: product %}
         </div>
     {% endfor %}
   </div>
