@@ -1,0 +1,451 @@
+{{ 'ght.product.filter.styles.css' | asset_url | stylesheet_tag }}
+
+<div class="ght_container" style="display: none;">
+  <!-- Filter Sidebar -->
+  <div class="ght_filter-sidebar" id="ght-filter-sidebar">
+    <!-- Collection Accordion -->
+    <div class="ght_accordion-item">
+      <input type="checkbox" id="ght_collection" class="ght_accordion-toggle" checked>
+      <label class="ght_accordion-header" for="ght_collection">COLLECTION</label>
+      <div class="ght_accordion-content">
+        {% for collection in collections %}
+          <div class="ght_filter-option">
+            <input type="checkbox" id="ght_{{ collection.handle }}">
+            <label for="ght_{{ collection.handle }}">{{ collection.title }}</label>
+            <span class="ght_count">{{ collection.all_products_count }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Category Accordion -->
+    <div class="ght_accordion-item">
+      <input type="checkbox" id="ght_category" class="ght_accordion-toggle">
+      <label class="ght_accordion-header" for="ght_category">CATEGORY</label>
+      <div class="ght_accordion-content">
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_snowboards">
+          <label for="ght_snowboards">Snowboards</label>
+          <span class="ght_count">(14)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_accessories">
+          <label for="ght_accessories">Accessories</label>
+          <span class="ght_count">(8)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_apparel">
+          <label for="ght_apparel">Apparel</label>
+          <span class="ght_count">(22)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vendor Accordion -->
+    <div class="ght_accordion-item">
+      <input type="checkbox" id="ght_vendor" class="ght_accordion-toggle">
+      <label class="ght_accordion-header" for="ght_vendor">VENDOR</label>
+      <div class="ght_accordion-content">
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_vendor1">
+          <label for="ght_vendor1">Burton</label>
+          <span class="ght_count">(7)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_vendor2">
+          <label for="ght_vendor2">K2</label>
+          <span class="ght_count">(5)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_vendor3">
+          <label for="ght_vendor3">Ride</label>
+          <span class="ght_count">(3)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Type Accordion -->
+    <div class="ght_accordion-item">
+      <input type="checkbox" id="ght_product-type" class="ght_accordion-toggle">
+      <label class="ght_accordion-header" for="ght_product-type">PRODUCT TYPE</label>
+      <div class="ght_accordion-content">
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_type1">
+          <label for="ght_type1">All-Mountain</label>
+          <span class="ght_count">(9)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_type2">
+          <label for="ght_type2">Freestyle</label>
+          <span class="ght_count">(6)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_type3">
+          <label for="ght_type3">Powder</label>
+          <span class="ght_count">(4)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price Accordion -->
+    <div class="ght_accordion-item">
+      <input type="checkbox" id="ght_price" class="ght_accordion-toggle">
+      <label class="ght_accordion-header" for="ght_price">PRICE</label>
+      <div class="ght_accordion-content">
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_price1">
+          <label for="ght_price1">$0 - $500</label>
+          <span class="ght_count">(8)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_price2">
+          <label for="ght_price2">$500 - $1000</label>
+          <span class="ght_count">(10)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_price3">
+          <label for="ght_price3">$1000+</label>
+          <span class="ght_count">(6)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Percent Sale Accordion -->
+    <div class="ght_accordion-item">
+      <input type="checkbox" id="ght_percent-sale" class="ght_accordion-toggle">
+      <label class="ght_accordion-header" for="ght_percent-sale">PERCENT SALE</label>
+      <div class="ght_accordion-content">
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_sale1">
+          <label for="ght_sale1">10% Off</label>
+          <span class="ght_count">(5)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_sale2">
+          <label for="ght_sale2">20% Off</label>
+          <span class="ght_count">(3)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_sale3">
+          <label for="ght_sale3">30% Off</label>
+          <span class="ght_count">(2)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Availability Accordion -->
+    <div class="ght_accordion-item">
+      <input type="checkbox" id="ght_availability" class="ght_accordion-toggle">
+      <label class="ght_accordion-header" for="ght_availability">AVAILABILITY</label>
+      <div class="ght_accordion-content">
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_avail1">
+          <label for="ght_avail1">In Stock</label>
+          <span class="ght_count">(18)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_avail2">
+          <label for="ght_avail2">Out of Stock</label>
+          <span class="ght_count">(6)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tag Accordion -->
+    <div class="ght_accordion-item">
+      <input type="checkbox" id="ght_tag" class="ght_accordion-toggle">
+      <label class="ght_accordion-header" for="ght_tag">TAG</label>
+      <div class="ght_accordion-content">
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_tag1">
+          <label for="ght_tag1">New Arrival</label>
+          <span class="ght_count">(7)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_tag2">
+          <label for="ght_tag2">Best Seller</label>
+          <span class="ght_count">(5)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_tag3">
+          <label for="ght_tag3">Featured</label>
+          <span class="ght_count">(3)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ready to Ship Accordion -->
+    <div class="ght_accordion-item">
+      <input type="checkbox" id="ght_ready-to-ship" class="ght_accordion-toggle">
+      <label class="ght_accordion-header" for="ght_ready-to-ship">READY TO SHIP</label>
+      <div class="ght_accordion-content">
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_ship1">
+          <label for="ght_ship1">1-2 Days</label>
+          <span class="ght_count">(12)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_ship2">
+          <label for="ght_ship2">3-5 Days</label>
+          <span class="ght_count">(8)</span>
+        </div>
+        <div class="ght_filter-option">
+          <input type="checkbox" id="ght_ship3">
+          <label for="ght_ship3">1 Week</label>
+          <span class="ght_count">(4)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Container -->
+  <div class="ght_products-container">
+    <div class="ght_search-container">
+      <input type="text" placeholder="Search products">
+    </div>
+    <div class="ght_products-header">
+      <div class="ght_products-count">14 Products</div>
+      <div class="ght_sort-options">
+        <span>Show</span>
+        <select>
+          <option>12</option>
+          <option>24</option>
+          <option>36</option>
+        </select>
+        <select>
+          <option>Alphabetically, A-Z</option>
+          <option>Alphabetically, Z-A</option>
+          <option>Price, low to high</option>
+          <option>Price, high to low</option>
+        </select>
+      </div>
+    </div>
+    <div class="ght_products-grid">
+      <!-- Product placeholders to demonstrate layout -->
+      {% for card_product in collections.all.products %}
+        <div
+          class="grid__item scroll-trigger animate--slide-in"
+          data-cascade
+          style="--animation-order: {{ forloop.index }};"
+        >
+          <div class="card-wrapper product-card-wrapper underline-links-hover">
+            <div class="ght_product-image">Product Image</div>
+            <div class="ght_product-info">
+              <div class="ght_product-title">Gift Card</div>
+              <div class="ght_product-price">From $10.00 USD</div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script defer>
+  const API_URL = 'http://localhost:8787';
+
+  function ght_init() {
+    window.productTemplate = null;
+
+    const container = document.querySelector('#ProductGridContainer');
+    if (!container) return console.log('container not found');
+
+    const productGrid = container.querySelector('ul');
+    const gridWrapper = productGrid.parentNode;
+    const filterSidebar = document.querySelector('#ght-filter-sidebar');
+
+    const oldId = productGrid.getAttribute('id');
+    productGrid.setAttribute('data-old-id', oldId);
+    productGrid.setAttribute('id', `ght-product-grid`);
+    productGrid.setAttribute('data-ght-filter-items', 'true');
+
+    gridWrapper.appendChild(filterSidebar);
+    gridWrapper.appendChild(productGrid);
+
+    gridWrapper.style.display = 'flex';
+    gridWrapper.style.gap = '2rem';
+
+    // Store a template of the first product item if available
+    const firstProductItem = productGrid.querySelector('li');
+    if (firstProductItem) {
+      window.productTemplate = firstProductItem.cloneNode(true);
+    }
+  }
+
+  // Function to format price from cents to dollars
+  function formatPrice(cents) {
+    if (cents === null || cents === undefined || isNaN(cents)) {
+      return '$0.00 USD';
+    }
+    return `$${(cents / 100).toFixed(2)} USD`;
+  }
+
+  // Function to safely get image src with fallback
+  function getImageSrc(image) {
+    if (!image || !image.src) {
+      return 'https://via.placeholder.com/533';
+    }
+
+    // Make sure the URL starts with http or https
+    let src = image.src;
+    if (src.startsWith('//')) {
+      src = 'https:' + src;
+    }
+
+    return src;
+  }
+
+  // Function to update a product item with new data
+  function updateProductItem(template, product) {
+    const item = template.cloneNode(true);
+
+    // Update product title
+    const titleElements = item.querySelectorAll('.card__heading a');
+    titleElements.forEach((el) => {
+      el.textContent = product.title || 'Product';
+      el.href = `/products/${product.handle || 'product'}`;
+    });
+
+    // Update product images
+    const images = item.querySelectorAll('.media img');
+    if (images.length > 0 && product.media && product.media.length > 0) {
+      // Update primary image
+      if (images[0]) {
+        const primaryImage = product.media[0];
+        images[0].src = getImageSrc(primaryImage);
+        images[0].alt = primaryImage.alt || product.title || '';
+
+        // Update srcset if it exists
+        if (images[0].hasAttribute('srcset') && primaryImage.src) {
+          images[0].srcset = generateSrcset(primaryImage.src);
+        }
+      }
+
+      // Update secondary image (hover image) if it exists
+      if (images[1] && product.media.length > 1) {
+        const secondaryImage = product.media[1];
+        images[1].src = getImageSrc(secondaryImage);
+        images[1].alt = secondaryImage.alt || '';
+
+        // Update srcset if it exists
+        if (images[1].hasAttribute('srcset') && secondaryImage.src) {
+          images[1].srcset = generateSrcset(secondaryImage.src);
+        }
+      }
+    }
+
+    // Update price
+    const priceElements = item.querySelectorAll('.price-item');
+    const priceText = product.price_varies ? `From ${formatPrice(product.price_min)}` : formatPrice(product.price);
+
+    priceElements.forEach((el) => {
+      el.textContent = priceText;
+    });
+
+    // Update IDs and ARIA attributes to make them unique
+    const uniqueId = product.id || Math.random().toString(36).substring(2, 15);
+    const links = item.querySelectorAll('a[id]');
+    links.forEach((link) => {
+      const oldId = link.id;
+      const newId = `${oldId}-${uniqueId}`;
+      link.id = newId;
+
+      // Update any aria-labelledby attributes that referenced the old ID
+      const labelledElements = item.querySelectorAll(`[aria-labelledby*="${oldId}"]`);
+      labelledElements.forEach((el) => {
+        const labelledBy = el.getAttribute('aria-labelledby');
+        el.setAttribute('aria-labelledby', labelledBy.replace(oldId, newId));
+      });
+    });
+
+    return item;
+  }
+
+  // Function to generate srcset for responsive images
+  function generateSrcset(imageSrc) {
+    if (!imageSrc) return '';
+
+    // Make sure the URL starts with http or https
+    if (imageSrc.startsWith('//')) {
+      imageSrc = 'https:' + imageSrc;
+    }
+
+    const widths = [165, 360, 533, 720, 940, 1066];
+    let baseUrl = imageSrc;
+    let version = '';
+
+    // Handle URLs with query parameters
+    if (imageSrc.includes('?')) {
+      baseUrl = imageSrc.split('?')[0];
+      if (imageSrc.includes('?v=')) {
+        version = imageSrc.split('?v=')[1];
+      }
+    }
+
+    let srcset = widths
+      .map((width) => `${baseUrl}${version ? '?v=' + version + '&' : '?'}width=${width} ${width}w`)
+      .join(',\n');
+
+    // Add the original image
+    srcset += `,\n${baseUrl}${version ? '?v=' + version : ''} 2881w`;
+
+    return srcset;
+  }
+
+  // Function to replace product grid content with new products
+  function updateProductGrid(products) {
+    const productGrid = document.querySelector('#ght-product-grid');
+    if (!productGrid) {
+      console.error('Product grid not found');
+      return;
+    }
+
+    // If we don't have a template yet, try to get one from the current grid
+    if (!window.productTemplate) {
+      const firstItem = productGrid.querySelector('li');
+      if (firstItem) {
+        window.productTemplate = firstItem.cloneNode(true);
+      } else {
+        console.error('No product template available');
+        return;
+      }
+    }
+
+    // Clear the current grid
+    productGrid.innerHTML = '';
+
+    // Add new products
+    if (Array.isArray(products) && products.length > 0) {
+      products.forEach((product, index) => {
+        const productItem = updateProductItem(window.productTemplate, product);
+        productItem.setAttribute('style', `--animation-order: ${index + 1};`);
+        productGrid.appendChild(productItem);
+      });
+    } else {
+      productGrid.innerHTML = '<li class="no-results">No products found</li>';
+    }
+  }
+
+  function filterProducts() {
+    const collection = document.querySelector('#ght_collection').value;
+    const category = document.querySelector('#ght_category').value;
+    const vendor = document.querySelector('#ght_vendor').value;
+
+    fetch(`${API_URL}/products?collection=${collection}&category=${category}&vendor=${vendor}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        updateProductGrid(data)
+      });
+  }
+
+  function registerInputChange() {
+    const inputs = document.querySelectorAll('#ght-filter-sidebar .ght_accordion-content input');
+    inputs.forEach((input) => {
+      input.addEventListener('change', filterProducts);
+    });
+  }
+
+  ght_init();
+  registerInputChange();
+</script>

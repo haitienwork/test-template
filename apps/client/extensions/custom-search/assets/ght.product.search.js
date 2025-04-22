@@ -130,6 +130,7 @@ function removeSearchOverlay() {
   const searchOverlay = document.getElementById('search-overlay');
   if (searchOverlay) {
     searchOverlay.remove();
+    removeOverflowHidden();
   }
 }
 
@@ -142,10 +143,16 @@ function addOverflowHidden() {
   if (!body.classList.contains('overflow-hidden')) {
     setTimeout(() => {
       body.classList.add('overflow-hidden');
-    }, 500);
+    }, 200);
   }
 }
 
+function removeOverflowHidden() {
+  const body = document.body;
+  if (body.classList.contains('overflow-hidden')) {
+    body.classList.remove('overflow-hidden');
+  }
+}
 function getSuggestions(keyword) {
   const query = keyword.toLowerCase().trim();
 
@@ -162,10 +169,10 @@ const elements = {
       <li class="suggestions-item">${keyword}</li>
     `;
   },
-  product_item: (name, price) => {
+  product_item: (name, price, image) => {
     return `
       <li class="product-item">
-        <img src="https://picsum.photos/200" alt="" />
+        <img src="${image ? image : 'https://picsum.photos/200'}" alt="" style="width: 100%; height: 100%; object-fit: cover;" />
         <p>${name}</p>
         <span>${price}</span>
       </li>
@@ -173,10 +180,12 @@ const elements = {
   }
 }
 
-const searchProducts = (keyword) => {
-  return TEMP_PRODUCTS.filter(product =>
-    product.name.toLowerCase().includes(keyword.toLowerCase().trim())
-  );
+const searchProducts = async (keyword) => {
+  const response = await fetch(`${API_URL}/products?q=${keyword}`, {
+    cache: 'force-cache'
+  })
+  const data = await response.json()
+  return data
 }
 
 const renderEmpty = () => {
@@ -211,14 +220,14 @@ const hideNotFound = () => {
   container.style.display = "block";
 }
 
-const handleChangeSearchInput = debounce((e) => {
+const handleChangeSearchInput = debounce(async (e) => {
   const keyword = e.target.value;
   if (!keyword) {
     renderEmpty();
     return;
   }
   // Step 1: Search products match with keyword
-  const productFounds = searchProducts(keyword);
+  const productFounds = await searchProducts(keyword);
   // Step 2: Render Not found if no products found
   if (productFounds.length === 0) {
     renderNotFound(keyword);
@@ -232,7 +241,6 @@ const handleChangeSearchInput = debounce((e) => {
   searchResultsList.innerHTML = "";
 
   // Step 3: Render suggestions if products found
-  const suggestions = getSuggestions(keyword);
   const suggestionElement = document.createElement('div');
   suggestionElement.classList.add('search-results-suggestions');
   suggestionElement.id = 'search-results-suggestions';
@@ -241,14 +249,13 @@ const handleChangeSearchInput = debounce((e) => {
   // Append title
   html += `<p>Suggestions</p>`;
   // Append suggestions
-  suggestions.forEach(suggestion => {
-    html += elements.suggestion_item(suggestion.name);
+  productFounds.suggestions.forEach(suggestion => {
+    html += elements.suggestion_item(suggestion);
   });
   suggestionElement.innerHTML = html;
   searchResultsList.appendChild(suggestionElement);
 
   // Step 4: Render results if products found
-  const products = searchProducts(keyword);
   const productList = document.createElement('div');
   productList.id = 'search-results-results-list';
   productList.classList.add('search-results-results-list');
@@ -257,12 +264,14 @@ const handleChangeSearchInput = debounce((e) => {
       <a href="#">View All products</a>
     </div>`
   html += '<ul class="product-list">'
-  products.forEach(product => {
-    html += elements.product_item(product.name, product.price);
+  productFounds.products.forEach(product => {
+    html += elements.product_item(product.title, product.price, product.images[0]);
   });
   html += '</ul>';
   productList.innerHTML = html;
   searchResultsList.appendChild(productList);
+
+  addOverflowHidden();
 }, 300);
 
 // register event listeners

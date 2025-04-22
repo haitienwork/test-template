@@ -147,6 +147,8 @@
   gap: 1rem;
   margin-top: 1rem;
   padding: 0 !important;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .product-item {

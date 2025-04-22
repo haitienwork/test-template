@@ -38,7 +38,6 @@ function addToRecentViewed(handle) {
 //* Each anchor with href clicked, add the product to the recent viewed items
 function registerClickEventProduct() {
   const anchor = document.querySelectorAll('a[href^="/product"]');
-  console.log('DEBUG: anchor', anchor);
 
   if (anchor) {
     anchor.forEach((a) => {

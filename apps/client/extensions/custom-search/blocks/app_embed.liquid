@@ -2,6 +2,10 @@
   {% render 'ght.product.search' %}
 {% endif %}
 
+{% if block.settings.enable_product_filter %}
+  {% render 'ght.product.filter' %}
+{% endif %}
+
 {% schema %}
 {
   "name": "GHT Product Search",
@@ -14,6 +18,12 @@
       "label": "Product Search",
       "default": false
     },
+    {
+      "type": "checkbox",
+      "id": "enable_product_filter",
+      "label": "Product Filter",
+      "default": false
+    }
   ]
 }
 {% endschema %}
